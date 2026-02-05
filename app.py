@@ -41,7 +41,7 @@ app.config["PERMANENT_SESSION_LIFETIME"] = dt.timedelta(days=200)
 
 # ====== DB ======
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DB_PATH = os.path.join(BASE_DIR, "instance", "app.db")
+DB_PATH = os.path.join(BASE_DIR, "app.db")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_PATH}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
