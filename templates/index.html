@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{{ display.name if display.name else "מערכת תורים" }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        svg {
+            vertical-align: middle;
+        }
+
+        .icon-sm {
+            width: 18px;
+            height: 18px;
+        }
+
+        .icon-md {
+            width: 24px;
+            height: 24px;
+        }
+
+        .icon-xl {
+            width: 64px;
+            height: 64px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <header class="app-header">
+        <div class="header-left">
+
+            <div class="business-info">
+                <h1 class="business-name">
+                    {{ display.name if display.name else "QuietSlot" }}
+                </h1>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-profile" id="userProfile" title="לחץ להתחברות">
+                <div class="user-avatar">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <span class="user-name" id="headerUserName">התחבר</span>
+                <button id="logoutBtn" class="logout-btn hidden" title="התנתק">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <div class="progress-section">
+            <div class="progress-info">
+                <span id="stepCounterText" class="step-text"></span>
+            </div>
+            <div class="progress-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+        </div>
+
+        <main class="booking-card">
+
+            <button id="backBtn" class="back-btn hidden">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg> חזרה
+            </button>
+
+            <!-- STEP 0: MODE SELECTION -->
+            <section class="wizard-step active" data-step="mode">
+                <div class="step-header">
+                    <h2 class="step-title">ברוך הבא</h2>
+                    <p class="step-subtitle">מה תרצה לעשות היום?</p>
+                </div>
+                <div class="mode-grid">
+                    <div class="mode-card" data-mode="book">
+                        <div class="mode-icon">
+                            <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                                <line x1="12" y1="14" x2="12" y2="18"></line>
+                                <line x1="10" y1="16" x2="14" y2="16"></line>
+                            </svg>
+                        </div>
+                        <h3>קביעת תור</h3>
+                        <p>הזמן תור חדש בכמה לחיצות</p>
+                    </div>
+
+                    <div class="mode-card" data-mode="cancel">
+                        <div class="mode-icon">
+                            <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                                <line x1="15" y1="14" x2="9" y2="18"></line>
+                                <line x1="9" y1="14" x2="15" y2="18"></line>
+                            </svg>
+                        </div>
+                        <h3>ביטול תור</h3>
+                        <p>נהל או בטל תורים קיימים</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 1: PHONE -->
+            <section class="wizard-step" data-step="phone">
+                <div class="step-header">
+                    <h2 class="step-title">בוא נזהה אותך</h2>
+                    <p class="step-subtitle">הזן מספר טלפון להתחברות מהירה</p>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            style="position: absolute; right: 20px; color: var(--text-light);">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                        <input id="phoneInput" type="tel" placeholder="מספר טלפון">
+                    </div>
+                    <button id="sendCodeBtn" class="primary-btn">
+                        שלח קוד אימות <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- STEP 1.5: OTP -->
+            <section class="wizard-step" data-step="otp">
+                <div class="step-header">
+                    <h2 class="step-title">אימות קוד</h2>
+                    <p class="step-subtitle">הזן את הקוד שנשלח אליך</p>
+                </div>
+
+                <div class="otp-container">
+                    <div class="otp-inputs">
+                        <input type="text" maxlength="1" inputmode="numeric">
+                        <input type="text" maxlength="1" inputmode="numeric">
+                        <input type="text" maxlength="1" inputmode="numeric">
+                        <input type="text" maxlength="1" inputmode="numeric">
+                        <input type="text" maxlength="1" inputmode="numeric">
+                        <input type="text" maxlength="1" inputmode="numeric">
+                    </div>
+
+                    <div id="otpNameField" class="form-group hidden" style="margin-top: 2rem;">
+                        <div class="input-with-icon">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="position: absolute; right: 20px; color: var(--text-light);">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <input id="otpNameInput" type="text" placeholder="שם מלא (פעם ראשונה בלבד)">
+                        </div>
+                    </div>
+
+                    <div class="otp-actions" style="margin-top: 2rem;">
+                        <button id="verifyCodeBtn" class="primary-btn">
+                            אישור והתחבר <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <button id="resendCodeBtn" class="secondary-btn" disabled>
+                            <span>שלח שוב</span>
+                            <span id="otpCooldownTimer"></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 2: PERSONAL DETAILS -->
+            <section class="wizard-step" data-step="details">
+                <div class="step-header">
+                    <h2 class="step-title">כמעט שם</h2>
+                    <p class="step-subtitle">איך כדאי לנו לפנות אליך?</p>
+                </div>
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            style="position: absolute; right: 20px; color: var(--text-light);">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <input id="nameInput" type="text" placeholder="שם מלא">
+                    </div>
+                    <button id="detailsNextBtn" class="primary-btn">
+                        המשך לבחירת שירות <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- STEP 2.5: SERVICE SELECTION -->
+            <section class="wizard-step" data-step="service">
+                <div class="step-header">
+                    <h2 class="step-title">מה הסגנון שלך?</h2>
+                    <p class="step-subtitle">בחר את השירות המבוקש</p>
+                </div>
+
+                <!-- Services Container (JS fills this) -->
+                <div class="service-grid">
+                    <div id="servicesContainer" class="services-grid"></div>
+                </div>
+
+                <button id="serviceNextBtn" class="primary-btn" disabled>
+                    המשך לבחירת תאריך <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </section>
+
+            <!-- STEP 3: DATE SELECTION -->
+            <section class="wizard-step" data-step="date">
+                <div class="step-header">
+                    <h2 class="step-title">מתי נוח לך?</h2>
+                    <p class="step-subtitle">בחר תאריך פנוי מהלוח</p>
+                </div>
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button class="cal-nav" id="nextMonth">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                        <div class="cal-title" id="calendarTitle"></div>
+                        <button class="cal-nav" id="prevMonth">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="calendar-weekdays">
+                        <div>א</div>
+                        <div>ב</div>
+                        <div>ג</div>
+                        <div>ד</div>
+                        <div>ה</div>
+                        <div>ו</div>
+                        <div>ש</div>
+                    </div>
+
+                    <div id="calendar" class="calendar-grid"></div>
+                </div>
+            </section>
+
+            <!-- STEP 4: TIME SELECTION -->
+            <section class="wizard-step" data-step="time">
+                <div class="step-header">
+                    <h2 class="step-title">שעות זמינות</h2>
+                    <p class="step-subtitle">בחר את השעה המתאימה לך ביותר</p>
+                </div>
+                <div id="slots" class="slots-grid"></div>
+            </section>
+
+            <!-- STEP 5: CONFIRMATION -->
+            <section class="wizard-step" data-step="confirm">
+                <h2 class="step-title">אישור סופי</h2>
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <svg class="icon-xl" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                        <polyline points="9 16 11 18 15 14"></polyline>
+                    </svg>
+                </div>
+                <button id="confirmBookingBtn" class="primary-btn">
+                    אשר הזמנה <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </button>
+            </section>
+
+            <!-- STEP CANCEL: LIST APPOINTMENTS -->
+            <section class="wizard-step" data-step="cancel-list">
+                <div class="step-header">
+                    <h2 class="step-title">התורים שלי</h2>
+                    <p class="step-subtitle">בחר תור לביטול מהרשימה</p>
+                </div>
+                <div id="cancelList" class="slots-grid"></div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-box">
+            <h3 id="modalTitle"></h3>
+            <p id="modalText"></p>
+            <div class="modal-actions">
+                <button id="modalConfirm" class="primary-btn hidden">
+                    אישור <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </button>
+                <button id="modalClose" class="secondary-btn">סגור</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script>
+        window.API_BASE = "{{ api_base|default('') }}";
+        window.BUSINESS_SLUG = "{{ business_slug|default('default') }}";
+    </script>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+
+</html>

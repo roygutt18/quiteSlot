@@ -1,0 +1,88 @@
+{
+    "businesses": {
+        "default": {
+            "timezone": "Asia/Jerusalem",
+            "working_days": [
+                "sun",
+                "mon",
+                "tue",
+                "wed",
+                "thu"
+            ],
+            "working_hours": {
+                "start": "09:00",
+                "end": "17:00"
+            },
+            "closed_dates": [
+                "2026-01-01"
+            ],
+            "calendar_id": "primary",
+            "lookahead_days": 14,
+            "suggest_count": 3,
+            "services": [
+                {
+                    "id": "haircut",
+                    "name": "תספורת גברים",
+                    "duration_minutes": 15
+                },
+                {
+                    "id": "beard",
+                    "name": "עיצוב זקן",
+                    "duration_minutes": 10
+                },
+                {
+                    "id": "full",
+                    "name": "תספורת + זקן",
+                    "duration_minutes": 25
+                }
+            ],
+            "display": {
+                "name": "הספר של דני",
+                "logo": "/static/logos/dani.png",
+                "tagline": "תספורת מדויקת. בלי המתנה.",
+                "primary_color": "#111827"
+            }
+        },
+        "barber-demo": {
+            "timezone": "Asia/Jerusalem",
+            "working_days": [
+                "sun",
+                "mon",
+                "tue",
+                "wed",
+                "thu"
+            ],
+            "working_hours": {
+                "start": "10:00",
+                "end": "12:00"
+            },
+            "closed_dates": [],
+            "calendar_id": "primary",
+            "lookahead_days": 14,
+            "suggest_count": 3,
+            "services": [
+                {
+                    "id": "haircut",
+                    "name": "תספורת",
+                    "duration_minutes": 20
+                },
+                {
+                    "id": "beard",
+                    "name": "זקן",
+                    "duration_minutes": 15
+                },
+                {
+                    "id": "vip",
+                    "name": "VIP מלא",
+                    "duration_minutes": 40
+                }
+            ],
+            "display": {
+                "name": "Barber Demo",
+                "logo": "/static/logos/demo.png",
+                "tagline": "דמו של מערכת קביעת תורים",
+                "primary_color": "#7c3aed"
+            }
+        }
+    }
+}

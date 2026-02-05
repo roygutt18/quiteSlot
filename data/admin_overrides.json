@@ -1,0 +1,51 @@
+{
+  "default": {
+    "display": {
+      "name": "ספר דמו"
+    },
+    "working_days": [
+      "sun",
+      "mon",
+      "tue",
+      "wed",
+      "thu"
+    ],
+    "closed_dates": [
+      "2026-02-05"
+    ],
+    "services": [
+      {
+        "id": "haircut",
+        "name": "תספורת גברים",
+        "duration_minutes": 15
+      },
+      {
+        "id": "beard",
+        "name": "עיצוב זקן",
+        "duration_minutes": 10
+      },
+      {
+        "id": "full",
+        "name": "תספורת + זקן",
+        "duration_minutes": 25
+      },
+      {
+        "id": "vip",
+        "name": "VIP",
+        "duration_minutes": 40
+      }
+    ],
+    "working_hours": {
+      "default": {
+        "start": "09:00",
+        "end": "19:00"
+      },
+      "by_day": {
+        "fri": {
+          "start": "08:00",
+          "end": "13:00"
+        }
+      }
+    }
+  }
+}

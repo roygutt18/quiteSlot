@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>כניסת מנהל | פאנל ניהול</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        svg {
+            vertical-align: middle;
+        }
+
+        .icon-sm {
+            width: 18px;
+            height: 18px;
+        }
+
+        .icon-md {
+            width: 24px;
+            height: 24px;
+        }
+
+        .icon-lg {
+            width: 32px;
+            height: 32px;
+        }
+    </style>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --error: #ef4444;
+            --border: #e2e8f0;
+            --input-focus: #3b82f6;
+            --radius: 16px;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(37, 99, 235, 0.03) 0%, transparent 40%);
+            color: var(--text-main);
+            font-family: 'Assistant', sans-serif;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+            padding: 1.5rem;
+            box-sizing: border-box;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .logo-area {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), #60a5fa);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        .logo-area h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0;
+            color: var(--text-main);
+            letter-spacing: -0.01em;
+        }
+
+        .logo-area p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 0.2rem;
+        }
+
+        .form-group {
+            text-align: right;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--input-focus);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        @media (hover: hover) {
+            input:not(:disabled):hover {
+                border-color: var(--text-muted);
+            }
+        }
+
+        input:disabled {
+            background: #f1f5f9;
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.875rem;
+            border-radius: 12px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-hover));
+            color: #fff;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            margin-top: 1rem;
+        }
+
+        @media (hover: hover) {
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px -5px rgba(37, 99, 235, 0.4);
+            }
+
+            .btn-ghost:hover {
+                background: #f8fafc;
+                color: var(--text-main);
+                border-color: var(--text-muted);
+            }
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            opacity: 0.9;
+        }
+
+        .error-msg {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: var(--error);
+            padding: 0.75rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 1.5rem;
+            }
+
+            .logo-area {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        /* RTL Specifics */
+        [dir="rtl"] input {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                </div>
+                <div>
+                    <h1>Admin Portal</h1>
+                    <p>כניסת מנהלים למערכת</p>
+                </div>
+            </div>
+
+            {% if error %}
+            <div class="error-msg">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                {{ error }}
+            </div>
+            {% endif %}
+
+            {% if step == "phone" %}
+            <form method="post" action="/admin/login/start">
+                <input type="hidden" name="next" value="{{ next_url }}" />
+                <div class="form-group">
+                    <label for="phone">מספר טלפון</label>
+                    <input id="phone" name="phone" type="tel" placeholder="0500000000" autocomplete="tel" required
+                        autofocus />
+                </div>
+                <button class="btn btn-primary" type="submit">
+                    שלח קוד אימות <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: scaleX(-1);">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </button>
+            </form>
+            {% else %}
+            <form id="adminOtpForm" method="post" action="/admin/login/verify">
+                <input type="hidden" name="next" value="{{ next_url }}" />
+                <input type="hidden" id="fullCode" name="code" />
+                <div class="form-group">
+                    <label>טלפון</label>
+                    <input value="{{ pending_phone }}" disabled style="text-align: center;" />
+                </div>
+                <div class="otp-inputs"
+                    style="direction: ltr; display: flex; gap: 8px; justify-content: center; margin: 2rem 0;">
+                    <input type="text" maxlength="1" inputmode="numeric"
+                        style="width: 40px; height: 50px; text-align: center; font-size: 1.25rem; font-weight: 700;">
+                    <input type="text" maxlength="1" inputmode="numeric"
+                        style="width: 40px; height: 50px; text-align: center; font-size: 1.25rem; font-weight: 700;">
+                    <input type="text" maxlength="1" inputmode="numeric"
+                        style="width: 40px; height: 50px; text-align: center; font-size: 1.25rem; font-weight: 700;">
+                    <input type="text" maxlength="1" inputmode="numeric"
+                        style="width: 40px; height: 50px; text-align: center; font-size: 1.25rem; font-weight: 700;">
+                    <input type="text" maxlength="1" inputmode="numeric"
+                        style="width: 40px; height: 50px; text-align: center; font-size: 1.25rem; font-weight: 700;">
+                    <input type="text" maxlength="1" inputmode="numeric"
+                        style="width: 40px; height: 50px; text-align: center; font-size: 1.25rem; font-weight: 700;">
+                </div>
+                <button class="btn btn-primary" type="submit">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" style="margin-left:8px;">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg> אימות וכניסה
+                </button>
+                <a class="btn btn-ghost" href="/admin/login?next={{ next_url | urlencode }}">
+                    חזור למסך קודם
+                </a>
+            </form>
+            <script>
+                const inputs = document.querySelectorAll('.otp-inputs input');
+                const fullCodeInput = document.getElementById('fullCode');
+                const form = document.getElementById('adminOtpForm');
+
+                inputs.forEach((input, index) => {
+                    input.addEventListener('input', () => {
+                        const val = input.value;
+                        if (val && val.length > 1) input.value = val[0];
+                        if (input.value && index < inputs.length - 1) inputs[index + 1].focus();
+                        fullCodeInput.value = Array.from(inputs).map(i => i.value).join('');
+                    });
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Backspace' && !input.value && index > 0) inputs[index - 1].focus();
+                    });
+                    input.addEventListener('paste', (e) => {
+                        e.preventDefault();
+                        const data = (e.clipboardData || window.clipboardData).getData("text").trim().replace(/\D/g, "");
+                        if (data) {
+                            data.split("").forEach((char, i) => {
+                                if (inputs[index + i]) inputs[index + i].value = char;
+                            });
+                            fullCodeInput.value = Array.from(inputs).map(i => i.value).join('');
+                            const nextIdx = Math.min(index + data.length, inputs.length - 1);
+                            inputs[nextIdx].focus();
+                        }
+                    });
+                });
+
+                inputs[0].focus();
+            </script>
+            {% endif %}
+        </div>
+
+        <div class="footer-note" style="text-align:center;">
+            הגישה למערכת מאובטחת ומנוטרת.
+        </div>
+    </div>
+
+    <!-- For future consistency -->
+    <div id="modal" class="modal hidden"></div>
+    <div id="toast" class="toast hidden"></div>
+</body>
+
+</html>
