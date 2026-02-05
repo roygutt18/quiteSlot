@@ -16,7 +16,3 @@ flask-bcrypt
 flask-mail
 flask-cors
 flask-limiter
-flask-limiter-redis
-flask-limiter-request-headers
-flask-limiter-request-params
-flask-limiter-request-path
